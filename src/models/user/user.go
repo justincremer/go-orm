@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 
 	database "github.com/justincremer/go-orm/src/database"
-	apiutils "github.com/justincremer/go-orm/src/utils"
+	utils "github.com/justincremer/go-orm/src/utils"
 
 	"gorm.io/gorm"
 )
@@ -43,12 +43,12 @@ func Create(c *fiber.Ctx) error {
 
 	user := new(User)
 
-	if err := c.BodyParser(user); err != nil {
+	if err := c.BodyParser(&user); err != nil {
 		log.Fatal(err)
 		return c.Status(503).SendString("Error reading input")
 	}
 
-	passhash, err := apiutils.HashPassword(user.Password)
+	passhash, err := utils.HashPassword(user.Password)
 
 	if err != nil {
 		log.Fatal(err)
@@ -84,6 +84,20 @@ func Update(c *fiber.Ctx) error {
 }
 
 func Delete(c *fiber.Ctx) error {
+	db := database.Connection
+	id := c.Params("id")
+
+	var user User
+	db.Find(&user, id)
+	if user.Username == "" {
+		return c.Status(400).SendString("User not found")
+	}
+	db.Delete(&user)
+
+	return c.Status(200).SendString("Successfuly deleted user")
+}
+
+func Authenticate(c *fiber.Ctx) error {
 	db := database.Connection
 	id := c.Params("id")
 
