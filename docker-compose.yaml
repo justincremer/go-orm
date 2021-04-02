@@ -10,8 +10,8 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_PORT=5432
-    volumes:
-      - pg-data:/var/lib/postgresql/data
+    # volumes:
+    #   - pg-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
 
@@ -27,16 +27,14 @@ services:
 
   # api:
   #   build: ./services
-  #   command: 
+  #   command:
   #     sh -c 'npm i && npm run build && npm run start'
-  #   env_file: 
+  #   env_file:
   #     - api.env
   #   volumes:
   #     - ./services:/var/www/api
   #   ports:
   #     - 3001:3001
-
-volumes:
-  pg-data:
-    external: true
-  
+# volumes:
+#   pg-data:
+#     external: true
