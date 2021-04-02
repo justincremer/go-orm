@@ -1,4 +1,4 @@
-package apiUtils
+package apiutils
 
 import "golang.org/x/crypto/bcrypt"
 

@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/justincremer/go-orm/src/apiUtils"
+	"github.com/justincremer/go-orm/src/apiutils"
 	"github.com/justincremer/go-orm/src/database"
 
 	"gorm.io/gorm"
@@ -47,7 +47,7 @@ func Create(c *fiber.Ctx) error {
 		return c.Status(503).SendString("Error reading input")
 	}
 
-	passhash, err := apiUtils.HashPassword(user.Password)
+	passhash, err := apiutils.HashPassword(user.Password)
 	if err != nil {
 		log.Fatal(err)
 	}

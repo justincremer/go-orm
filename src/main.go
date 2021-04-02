@@ -7,7 +7,9 @@ import (
 	"github.com/justincremer/go-orm/src/server"
 )
 
-const port string = ":8080"
+const (
+	port string = ":8080"
+)
 
 func main() {
 	config := fiber.Config{}
