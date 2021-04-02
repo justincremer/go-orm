@@ -4,8 +4,9 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/justincremer/go-orm/src/apiutils"
-	"github.com/justincremer/go-orm/src/database"
+
+	database "github.com/justincremer/go-orm/src/database"
+	apiutils "github.com/justincremer/go-orm/src/utils"
 
 	"gorm.io/gorm"
 )
@@ -48,6 +49,7 @@ func Create(c *fiber.Ctx) error {
 	}
 
 	passhash, err := apiutils.HashPassword(user.Password)
+
 	if err != nil {
 		log.Fatal(err)
 	}
